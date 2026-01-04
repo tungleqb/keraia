@@ -6,6 +6,24 @@ KERAIA là một framework phát triển cho kỹ thuật tri thức tượng tr
 
 KERAIA is a framework for symbolic knowledge engineering designed to address the challenges of representing, reasoning with, and executing knowledge in dynamic and complex environments.
 
+## Bắt đầu nhanh / Quick Start
+
+```bash
+# 1. Clone repository
+git clone https://github.com/tungleqb/keraia.git
+cd keraia
+
+# 2. Chạy Python demo / Run Python demo
+pip install -r requirements.txt
+cd impl/causal
+python main.py
+
+# 3. Hoặc chạy Java demo (cần Maven) / Or run Java demo (requires Maven)
+cd impl
+mvn clean install
+mvn exec:java
+```
+
 ### Các tính năng chính / Key Features
 
 - **Clouds of Knowledge**: Tích hợp các nguồn tri thức đa dạng / Integrate diverse knowledge sources
@@ -58,6 +76,10 @@ cd keraia
 ### Bước 2: Cài đặt Python Dependencies / Install Python Dependencies
 
 ```bash
+# Cách 1: Cài đặt từ requirements.txt / Method 1: Install from requirements.txt
+pip install -r requirements.txt
+
+# Cách 2: Cài đặt thủ công / Method 2: Manual installation
 pip install numpy networkx dowhy pandas
 ```
 
@@ -105,48 +127,24 @@ java -cp ".:path/to/jena.jar:path/to/neo4j-driver.jar" NavalCloudElaborationDemo
 
 #### Phương pháp 2: Sử dụng Maven / Method 2: Using Maven
 
-Tạo file `pom.xml` trong thư mục `impl`:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    
-    <groupId>keraia</groupId>
-    <artifactId>keraia-impl</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-    
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>apache-jena-libs</artifactId>
-            <version>4.7.0</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.neo4j.driver</groupId>
-            <artifactId>neo4j-java-driver</artifactId>
-            <version>5.5.0</version>
-        </dependency>
-    </dependencies>
-</project>
-```
-
-Sau đó chạy / Then run:
+**Đã có sẵn file `impl/pom.xml` / A `impl/pom.xml` file is already provided**
 
 ```bash
 cd impl
+
+# Tải dependencies / Download dependencies
+mvn clean install
+
+# Biên dịch / Compile
 mvn compile
+
+# Chạy main demo / Run main demo
 mvn exec:java -Dexec.mainClass="NavalCloudElaborationDemo"
 ```
+
+Nếu muốn tạo file pom.xml tùy chỉnh, xem nội dung file `impl/pom.xml` đã có sẵn trong repository.
+
+If you want to customize the pom.xml, see the provided `impl/pom.xml` file in the repository.
 
 #### Kết quả mong đợi / Expected Output
 
