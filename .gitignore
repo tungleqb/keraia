@@ -1,0 +1,70 @@
+# KERAIA .gitignore
+
+# Java compiled files
+*.class
+*.jar
+*.war
+*.ear
+target/
+impl/target/
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+env/
+ENV/
+
+# Neo4j
+neo4j-data/
+*.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
