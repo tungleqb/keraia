@@ -47,8 +47,8 @@ python main.py
 ### Cho các ví dụ Java / For Java Examples
 
 - **Java Development Kit (JDK)**: Phiên bản 11 trở lên / Version 11 or higher
-- **Apache Jena**: Thư viện cho xử lý ontology / Library for ontology processing
-- **Neo4j Java Driver**: Cho tương tác với knowledge graph / For knowledge graph interaction
+- **Apache Jena**: Phiên bản 4.7.0 trở lên / Version 4.7.0 or higher - Thư viện cho xử lý ontology / Library for ontology processing
+- **Neo4j Java Driver**: Phiên bản 5.0.0 trở lên / Version 5.0.0 or higher - Cho tương tác với knowledge graph / For knowledge graph interaction
 - **Maven hoặc Gradle** (khuyến nghị): Để quản lý dependencies / For dependency management
 
 ### Cho các ví dụ Python / For Python Examples
@@ -135,8 +135,9 @@ java -cp ".:path/to/jena.jar:path/to/neo4j-driver.jar" NavalCloudElaborationDemo
 - Các custom packages như `aip.maps.KS` và `ksconvocation.KSFrame` cũng cần được implement
 
 **Note**: You need to download and add the following JAR files to classpath, plus implement custom packages:
-- Apache Jena, Neo4j Java Driver
-- Custom packages like `aip.maps.KS` and `ksconvocation.KSFrame`
+- Apache Jena (version 4.7.0+), Neo4j Java Driver (version 5.0.0+)
+- Custom packages like `aip.maps.KS` and `ksconvocation.KSFrame` are defined in the `impl/keraia/` subdirectories
+- These custom packages are part of the KERAIA framework and need to be compiled first
 
 #### Phương pháp 2: Sử dụng Maven / Method 2: Using Maven (Experimental)
 
@@ -240,7 +241,9 @@ Hoặc load trực tiếp / Or load directly:
 ```bash
 cd impl
 javac -cp ".:path/to/neo4j-driver.jar" main.java
-java -cp ".:path/to/neo4j-driver.jar" NavalCloudElaborationDemo.NavalKnowledgeGraph
+# Note: This attempts to run an inner class defined in main.java
+# The actual structure is: NavalCloudElaborationDemo class contains NavalKnowledgeGraph as inner class
+java -cp ".:path/to/neo4j-driver.jar" NavalCloudElaborationDemo\$NavalKnowledgeGraph
 ```
 
 **Lưu ý / Note**: Đảm bảo Neo4j đang chạy và cấu hình đúng thông tin đăng nhập / Ensure Neo4j is running and credentials are properly configured.

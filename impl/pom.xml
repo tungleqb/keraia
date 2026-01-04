@@ -46,6 +46,8 @@
     </dependencies>
     
     <build>
+        <!-- Note: This is a non-standard Maven structure for demonstration purposes.
+             For production use, reorganize source files into src/main/java directory. -->
         <sourceDirectory>.</sourceDirectory>
         <plugins>
             <plugin>
@@ -56,8 +58,15 @@
                     <source>11</source>
                     <target>11</target>
                     <includes>
-                        <include>**/*.java</include>
+                        <include>main.java</include>
+                        <!-- Add other specific .java files as needed -->
                     </includes>
+                    <!-- Exclude files that are not meant to be compiled independently -->
+                    <excludes>
+                        <exclude>**/impl.java</exclude>
+                        <exclude>**/keraiacode.java</exclude>
+                        <exclude>**/casecode.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             

@@ -8,7 +8,9 @@ numpy>=1.21.0
 networkx>=2.6.0
 
 # Causal inference library
-dowhy>=0.8
+# Note: DoWhy 0.11+ has better API but may have breaking changes
+# Specify version range for stability
+dowhy>=0.11,<0.15
 
 # Data manipulation and analysis
 pandas>=1.3.0
