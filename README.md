@@ -13,16 +13,20 @@ KERAIA is a framework for symbolic knowledge engineering designed to address the
 git clone https://github.com/tungleqb/keraia.git
 cd keraia
 
-# 2. Chạy Python demo / Run Python demo
+# 2. Chạy Python demo (Khuyến nghị) / Run Python demo (Recommended)
 pip install -r requirements.txt
 cd impl/causal
 python main.py
 
-# 3. Hoặc chạy Java demo (cần Maven) / Or run Java demo (requires Maven)
-cd impl
-mvn clean install
-mvn exec:java
+# 3. Các demo Java cần được điều chỉnh để chạy đầy đủ
+# Java demos require adjustments to run fully
+# Xem phần "How to Run" bên dưới để biết chi tiết
+# See "How to Run" section below for details
 ```
+
+**Lưu ý / Note**: Python implementation là cách dễ nhất để bắt đầu. Các file Java trong repository chứa code mẫu và cần được tổ chức thành project hoàn chỉnh để chạy.
+
+**Note**: The Python implementation is the easiest way to get started. The Java files in the repository contain sample code and need to be organized into a complete project to run.
 
 ### Các tính năng chính / Key Features
 
@@ -107,6 +111,10 @@ pip install numpy networkx dowhy pandas
 
 ### 1. Chạy Java Naval Scenario Demo / Running Java Naval Scenario Demo
 
+**Lưu ý quan trọng / Important Note**: Các file Java trong repository hiện tại chứa code mẫu và demo concepts. File `main.java` chứa một demo hoàn chỉnh có thể chạy được, nhưng các file khác có thể cần điều chỉnh.
+
+**Important Note**: The Java files in the current repository contain sample code and demo concepts. The `main.java` file contains a complete runnable demo, but other files may need adjustments.
+
 #### Phương pháp 1: Biên dịch và chạy trực tiếp / Method 1: Direct Compilation and Execution
 
 ```bash
@@ -124,36 +132,52 @@ java -cp ".:path/to/jena.jar:path/to/neo4j-driver.jar" NavalCloudElaborationDemo
 **Lưu ý / Note**: Bạn cần tải và thêm các JAR files sau vào classpath:
 - Apache Jena (từ / from: https://jena.apache.org/download/)
 - Neo4j Java Driver (từ / from: https://neo4j.com/developer/java/)
+- Các custom packages như `aip.maps.KS` và `ksconvocation.KSFrame` cũng cần được implement
 
-#### Phương pháp 2: Sử dụng Maven / Method 2: Using Maven
+**Note**: You need to download and add the following JAR files to classpath, plus implement custom packages:
+- Apache Jena, Neo4j Java Driver
+- Custom packages like `aip.maps.KS` and `ksconvocation.KSFrame`
 
-**Đã có sẵn file `impl/pom.xml` / A `impl/pom.xml` file is already provided**
+#### Phương pháp 2: Sử dụng Maven / Method 2: Using Maven (Experimental)
+
+**File `impl/pom.xml` được cung cấp như một template / A `impl/pom.xml` file is provided as a template**
+
+**Lưu ý / Note**: Hiện tại, các file Java cần được tổ chức lại để biên dịch thành công với Maven. File pom.xml được cung cấp như một điểm khởi đầu.
+
+**Note**: Currently, the Java files need to be reorganized to compile successfully with Maven. The pom.xml file is provided as a starting point.
 
 ```bash
 cd impl
 
-# Tải dependencies / Download dependencies
-mvn clean install
+# Thử biên dịch / Try to compile
+mvn clean compile
 
-# Biên dịch / Compile
-mvn compile
-
-# Chạy main demo / Run main demo
-mvn exec:java -Dexec.mainClass="NavalCloudElaborationDemo"
+# Lưu ý: Có thể gặp lỗi do cấu trúc code hiện tại
+# Note: May encounter errors due to current code structure
 ```
 
-Nếu muốn tạo file pom.xml tùy chỉnh, xem nội dung file `impl/pom.xml` đã có sẵn trong repository.
+**Khuyến nghị / Recommendation**: Sử dụng Python implementation để thử nghiệm framework nhanh chóng. Java implementation phù hợp hơn cho việc nghiên cứu và phát triển.
 
-If you want to customize the pom.xml, see the provided `impl/pom.xml` file in the repository.
+**Recommendation**: Use the Python implementation for quick experimentation with the framework. The Java implementation is better suited for research and development.
 
 #### Kết quả mong đợi / Expected Output
 
-Chương trình sẽ hiển thị / The program will display:
+**Lưu ý / Note**: Kết quả dưới đây là từ concept code. Để chạy thực tế, cần implement đầy đủ các dependencies.
+
+**Note**: The output below is from concept code. To run in practice, full dependencies need to be implemented.
+
+Chương trình sẽ hiển thị / The program would display:
 - Cloud A: Các nguồn tri thức ban đầu / Initial knowledge sources
 - Cloud B: Các tri thức đã được tinh chỉnh sau khi elaboration / Refined knowledge after elaboration
 - Thông tin về sonar detection, radar detection, threat probability, fleet positioning, v.v. / Information about sonar detection, radar detection, threat probability, fleet positioning, etc.
 
-### 2. Chạy Python Causal Reasoning Demo / Running Python Causal Reasoning Demo
+**Khuyến nghị / Recommendation**: Để xem demo hoạt động thực tế, hãy sử dụng Python implementation (bên dưới).
+
+**Recommendation**: To see a working demo, use the Python implementation (below).
+
+### 2. Chạy Python Causal Reasoning Demo / Running Python Causal Reasoning Demo ✅
+
+**Đây là cách dễ nhất và được khuyến nghị để thử nghiệm KERAIA / This is the easiest and recommended way to try KERAIA**
 
 ```bash
 cd impl/causal
@@ -164,9 +188,26 @@ python main.py
 ```
 
 **Kết quả mong đợi / Expected Output**:
-- Mô phỏng kịch bản hải quân với causal relationships / Naval scenario simulation with causal relationships
-- Probabilistic dependencies giữa các knowledge sources / Probabilistic dependencies between knowledge sources
-- Bayesian fusion và causal inference / Bayesian fusion and causal inference
+```
+Estimand type: EstimandType.NONPARAMETRIC_ATE
+
+### Estimand : 1
+Estimand name: backdoor
+Estimand expression:
+    d                                           
+─────────(E[KS-FC3|KS-TR2,KS-TR5,KS-TR4,KS-TR3])
+d[KS-TR1]
+
+Causal Effect Estimate: *** Causal Estimate ***
+Mean value: -0.038
+...
+```
+
+Chương trình sẽ:
+- Mô phỏng kịch bản hải quân với causal relationships / Simulate naval scenarios with causal relationships
+- Tính toán probabilistic dependencies giữa các knowledge sources / Calculate probabilistic dependencies between knowledge sources
+- Thực hiện Bayesian fusion và causal inference / Perform Bayesian fusion and causal inference
+- Hiển thị kết quả ước lượng nhân quả / Display causal estimation results
 
 ### 3. Chạy Knowledge Graph với Neo4j / Running Knowledge Graph with Neo4j
 
